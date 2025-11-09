@@ -60,9 +60,9 @@ dependencies {
 //	include(annotationProcessor(implementation("io.github.llamalad7:mixinextras-${mod_brand}:${project.mixinextras_version}")))
 }
 
-String MOD_ICON_PATH = 'assets/template_mod/icon.png'
-String MIXIN_CONFIG_PATH = 'template_mod.mixins.json'
-String LANG_DIR = 'assets/template_mod/lang'
+String MOD_ICON_PATH = 'assets/classicgamerule/icon.png'
+String MIXIN_CONFIG_PATH = 'classicgamerule.mixins.json'
+String LANG_DIR = 'assets/classicgamerule/lang'
 JavaVersion JAVA_COMPATIBILITY
 if (mcVersion >= 12005 && !(mcVersion < 12100 && mod_brand == 'forge')) {
 	JAVA_COMPATIBILITY = JavaVersion.VERSION_21
@@ -254,17 +254,5 @@ publishing {
 	// select the repositories you want to publish to
 	repositories {
 		// mavenLocal()
-
-//		// [FEATURE] FALLENS_MAVEN
-//		maven {
-//			url = fullArtifactVersion.endsWith("SNAPSHOT") ? "https://maven.fallenbreath.me/snapshots" : "https://maven.fallenbreath.me/releases"
-//			credentials(PasswordCredentials) {
-//				username = 'fallen'
-//				password = System.getenv("FALLENS_MAVEN_TOKEN")
-//			}
-//			authentication {
-//				basic(BasicAuthentication)
-//			}
-//		}
 	}
 }

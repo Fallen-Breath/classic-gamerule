@@ -1,16 +1,16 @@
 modLoader = "javafml"
 loaderVersion = "[31,)"
 license = "LGPLv3"
-issueTrackerURL = "https://github.com/Fallen-Breath/fabric-mod-template/issues"
+issueTrackerURL = "https://github.com/Fallen-Breath/classic-gamerule/issues"
 
 [[mods]]
 modId = "${id}"
 version = "${version}"
 displayName = "${name}"
-displayURL = "https://github.com/Fallen-Breath/fabric-mod-template"
+displayURL = "https://github.com/Fallen-Breath/classic-gamerule"
 authors = "Fallen_Breath"
 description = '''
-Template for my fabric mods
+Bring back the classic camel-case gamerules to MC 1.21.11+
 '''
 logoFile = "icon.png"
 

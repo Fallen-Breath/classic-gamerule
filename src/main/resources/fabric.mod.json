@@ -4,25 +4,25 @@
   "version": "${version}",
 
   "name": "${name}",
-  "description": "Template for my fabric mods",
+  "description": "Bring back the classic camel-case gamerules to MC 1.21.11+",
   "authors": [
     "Fallen_Breath"
   ],
   "contact": {
-    "homepage": "https://modrinth.com",
-    "sources": "https://github.com/Fallen-Breath/fabric-mod-template"
+    "homepage": "https://modrinth.com/mod/classic-gamerule",
+    "sources": "https://github.com/Fallen-Breath/classic-gamerule"
   },
 
-  "icon": "assets/template_mod/icon.png",
+  "icon": "assets/classicgamerule/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "me.fallenbreath.template_mod.TemplateMod"
+      "me.fallenbreath.classicgamerule.ClassicGameruleMod"
     ]
   },
   "mixins": [
-    "template_mod.mixins.json"
+    "classicgamerule.mixins.json"
   ],
 
   "depends": {
