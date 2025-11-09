@@ -22,7 +22,7 @@ package me.fallenbreath.classicgamerule.mixins.core;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
-import me.fallenbreath.classicgamerule.ClassicGameRuleCommandModifier;
+import me.fallenbreath.classicgamerule.core.ClassicGameRuleCommandModifier;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.server.commands.GameRuleCommand;

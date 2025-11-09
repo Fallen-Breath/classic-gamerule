@@ -18,7 +18,7 @@
  * along with Classic Gamerule.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.classicgamerule;
+package me.fallenbreath.classicgamerule.core;
 
 import com.mojang.brigadier.arguments.BoolArgumentType;
 import me.fallenbreath.classicgamerule.translation.Translations;

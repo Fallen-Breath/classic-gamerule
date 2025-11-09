@@ -18,11 +18,12 @@
  * along with Classic Gamerule.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.classicgamerule;
+package me.fallenbreath.classicgamerule.core;
 
 import com.google.common.collect.Sets;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.tree.LiteralCommandNode;
+import me.fallenbreath.classicgamerule.ClassicGameruleMod;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.world.flag.FeatureFlagSet;
