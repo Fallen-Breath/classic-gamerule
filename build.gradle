@@ -1,0 +1,79 @@
+import com.replaymod.gradle.preprocess.Node
+import groovy.json.JsonSlurper
+
+plugins {
+	id 'maven-publish'
+	id 'com.github.hierynomus.license' version '0.16.1' apply false
+	id 'dev.architectury.loom' version '1.13-SNAPSHOT' apply false
+
+	// https://github.com/ReplayMod/preprocessor
+	// https://github.com/Fallen-Breath/preprocessor
+	id 'com.replaymod.preprocess' version 'd452ef7612'
+
+	// https://github.com/Fallen-Breath/yamlang
+	id 'me.fallenbreath.yamlang' version '1.5.0' apply false
+}
+
+def linkNode(Node src, Node dst) {
+	def mappingFile = rootProject.file("versions/mapping-${src.project}-${dst.project}.txt")
+	src.link(dst, mappingFile.isFile() ? mappingFile : null)
+}
+
+preprocess {
+    strictExtraMappings = false
+
+	def settings = new JsonSlurper().parseText(file('settings.json').text)
+	def all_versions = new ArrayList<>(settings.versions)
+	all_versions.sort()  // low -> high
+	Map<String, Node> all_nodes = [:]
+
+	for (String version : all_versions) {
+		String[] versionParts = version.split("-")[0].split("\\.")
+		if (versionParts.size() == 2) {
+			versionParts = [versionParts[0], versionParts[1], "0"]
+		}
+		int versionId = Integer.parseInt(versionParts[0]) * 10000 + Integer.parseInt(versionParts[1]) * 100 + Integer.parseInt(versionParts[2])
+		all_nodes[version] = createNode(version, versionId, '')
+	}
+
+	Node prev_fabric_node = null
+	for (String version : all_versions) {
+		def (mc_version, mod_brand) = version.split("-")
+		def node = all_nodes[version]
+		switch (mod_brand) {
+			case "fabric":
+				if (prev_fabric_node != null) {
+					linkNode(prev_fabric_node, all_nodes[version])
+				}
+				prev_fabric_node = node
+				break
+			default:
+				linkNode(all_nodes["${mc_version}-fabric"], all_nodes[version])
+		}
+	}
+}
+
+tasks.register('buildAndGather') {
+	subprojects {
+		dependsOn project.tasks.named('build').get()
+	}
+	doFirst {
+		println 'Gathering builds'
+		def buildLibs = {
+			p -> p.buildDir.toPath().resolve('libs')
+		}
+		delete fileTree(buildLibs(rootProject)) {
+			include '*'
+		}
+		subprojects {
+			copy {
+				from(buildLibs(project)) {
+					include '*.jar'
+					exclude '*-dev.jar', '*-sources.jar', '*-shadow.jar'
+				}
+				into buildLibs(rootProject)
+				duplicatesStrategy = DuplicatesStrategy.INCLUDE
+			}
+		}
+	}
+}
