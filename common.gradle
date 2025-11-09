@@ -48,12 +48,6 @@ dependencies {
 	}
 
 	// dependencies
-	if (mod_brand == 'fabric') {
-		// necessary modules to enable the fabric-resource-loader for mc1.21.9+
-		["fabric-resource-loader-v0", "fabric-resource-loader-v1", "fabric-api-base"].forEach {
-			include(modImplementation(fabricApi.module(it, project.fabric_api_version)))
-		}
-	}
 }
 
 String MOD_ICON_PATH = 'assets/classicgamerule/icon.png'

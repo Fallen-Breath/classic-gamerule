@@ -20,6 +20,8 @@
 
 package me.fallenbreath.classicgamerule;
 
+import com.mojang.brigadier.arguments.BoolArgumentType;
+import me.fallenbreath.classicgamerule.translation.Translations;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.Component;
@@ -32,15 +34,14 @@ import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
-@SuppressWarnings("NoTranslation")
 public class GameRuleMappings
 {
-	public static final List<GameRuleMapping<?>> MAPPINGS = Lists.newArrayList();
+	public static final List<GameRuleMapping<?, ?>> MAPPINGS = Lists.newArrayList();
 
 	private static <T> int performQuery(String classicName, GameRule<@NotNull T> gameRule, CommandSourceStack source, T modernValue, T classicValue)
 	{
 		source.sendSuccess(() -> Component.translatable("commands.gamerule.query", gameRule.id(), gameRule.serialize(modernValue)), false);
-		source.sendSystemMessage(Component.translatable("classicgamerule.command.gamerule.query", classicName, gameRule.serialize(classicValue)).withStyle(ChatFormatting.GRAY));
+		source.sendSystemMessage(Translations.translatable(source, "classicgamerule.command.gamerule.query", classicName, gameRule.serialize(classicValue)).withStyle(ChatFormatting.GRAY));
 		return gameRule.getCommandResult(classicValue);
 	}
 
@@ -48,7 +49,7 @@ public class GameRuleMappings
 	{
 		source.getLevel().getGameRules().set(gameRule, modernValue, source.getServer());
 		source.sendSuccess(() -> Component.translatable("commands.gamerule.set", gameRule.id(), gameRule.serialize(modernValue)), true);
-		source.sendSystemMessage(Component.translatable("classicgamerule.command.gamerule.set", classicName, gameRule.serialize(classicValue)).withStyle(ChatFormatting.GRAY));
+		source.sendSystemMessage(Translations.translatable(source, "classicgamerule.command.gamerule.set", classicName, gameRule.serialize(classicValue)).withStyle(ChatFormatting.GRAY));
 		return gameRule.getCommandResult(classicValue);
 	}
 
@@ -65,7 +66,8 @@ public class GameRuleMappings
 					CommandSourceStack source = ctx.getSource();
 					T argValue = ctx.getArgument("value", gameRule.valueClass());
 					return performSet(classicName, gameRule, source, argValue, argValue);
-				}
+				},
+				gameRule::argument
 		));
 	}
 
@@ -84,7 +86,8 @@ public class GameRuleMappings
 					Boolean classicValue = ctx.getArgument("value", gameRule.valueClass());
 					Boolean modernValue = !classicValue;
 					return performSet(classicName, gameRule, source, classicValue, modernValue);
-				}
+				},
+				gameRule::argument
 		));
 	}
 
@@ -103,14 +106,15 @@ public class GameRuleMappings
 					boolean classicValue = classicValueMapper.apply(modernValue);
 
 					source.sendSuccess(() -> Component.translatable("commands.gamerule.query", gameRule.id(), gameRule.serialize(modernValue)), false);
-					source.sendSystemMessage(Component.translatable("classicgamerule.command.gamerule.query", classicName, classicValue).withStyle(ChatFormatting.GRAY));
+					source.sendSystemMessage(Translations.translatable(source, "classicgamerule.command.gamerule.query", classicName, classicValue).withStyle(ChatFormatting.GRAY));
 					return classicValue ? 1 : 0;
 				},
 				(ctx) -> {
 					CommandSourceStack source = ctx.getSource();
-					source.sendFailure(Component.translatable("classicgamerule.command.gamerule.set_disabled", classicName, gameRule.id()));
+					source.sendFailure(Translations.translatable(source, "classicgamerule.command.gamerule.set_disabled", classicName, gameRule.id()));
 					return 0;
-				}
+				},
+				BoolArgumentType::bool
 		));
 		addRule.accept("doFireTick", modernValue -> modernValue != 0);
 		addRule.accept("allowFireTicksAwayFromPlayer", modernValue -> modernValue == -1);

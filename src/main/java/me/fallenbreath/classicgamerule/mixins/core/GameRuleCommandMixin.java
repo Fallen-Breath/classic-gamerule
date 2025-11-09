@@ -18,7 +18,7 @@
  * along with Classic Gamerule.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.classicgamerule.mixins;
+package me.fallenbreath.classicgamerule.mixins.core;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;

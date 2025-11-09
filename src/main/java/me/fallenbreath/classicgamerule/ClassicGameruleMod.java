@@ -21,6 +21,7 @@
 package me.fallenbreath.classicgamerule;
 
 import com.mojang.logging.LogUtils;
+import me.fallenbreath.classicgamerule.translation.Translations;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.metadata.ModMetadata;
@@ -56,6 +57,7 @@ public class ClassicGameruleMod
 		ModMetadata metadata = FabricLoader.getInstance().getModContainer(MOD_ID).orElseThrow(RuntimeException::new).getMetadata();
 		MOD_NAME = metadata.getName();
 		MOD_VERSION = metadata.getVersion().getFriendlyString();
+		this.init();
 	}
 	//#elseif FORGE_LIKE
 	//$$ public ClassicGameruleMod()
@@ -63,11 +65,12 @@ public class ClassicGameruleMod
 	//$$ 	IModInfo modInfo = ModList.get().getModContainerById(MOD_ID).orElseThrow(RuntimeException::new).getModInfo();
 	//$$ 	MOD_NAME = modInfo.getDisplayName();
 	//$$ 	MOD_VERSION = modInfo.getVersion().toString();
+	//$$ 	this.init();
 	//$$ }
 	//#endif
 
 	private void init()
 	{
-		// common init here
+		Translations.load();
 	}
 }

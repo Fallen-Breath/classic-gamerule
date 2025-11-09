@@ -42,7 +42,7 @@ public class ClassicGameRuleCommandModifier
 			}
 		}
 
-		for (GameRuleMapping<?> mapping : GameRuleMappings.MAPPINGS)
+		for (GameRuleMapping<?, ?> mapping : GameRuleMappings.MAPPINGS)
 		{
 			if (!mapping.rule().requiredFeatures().isSubsetOf(featureFlagSet))
 			{

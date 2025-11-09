@@ -26,11 +26,14 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.world.level.gamerules.GameRule;
 import org.jetbrains.annotations.NotNull;
 
-public record GameRuleMapping<T>(
+import java.util.function.Supplier;
+
+public record GameRuleMapping<ClassicValue, ModernValue>(
 		String classicName,
-		GameRule<@NotNull T> rule,
-		RuleQuerier<T> ruleQuerier,
-		RuleSetter<T> ruleSetter
+		GameRule<@NotNull ModernValue> rule,
+		RuleQuerier ruleQuerier,
+		RuleSetter ruleSetter,
+		Supplier<@NotNull ArgumentType<ClassicValue>> argumentTypeSupplier
 )
 {
 	public int queryRule(CommandContext<CommandSourceStack> ctx)
@@ -44,19 +47,19 @@ public record GameRuleMapping<T>(
 	}
 
 	@NotNull
-	public ArgumentType<T> getArgument()
+	public ArgumentType<ClassicValue> getArgument()
 	{
-		return this.rule.argument();
+		return this.argumentTypeSupplier.get();
 	}
 
 	@FunctionalInterface
-	public interface RuleQuerier<T>
+	public interface RuleQuerier
 	{
 		int queryRule(CommandContext<CommandSourceStack> source);
 	}
 
 	@FunctionalInterface
-	public interface RuleSetter<T>
+	public interface RuleSetter
 	{
 		int setRule(CommandContext<CommandSourceStack> ctx);
 	}
