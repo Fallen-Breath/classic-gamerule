@@ -1,0 +1,6 @@
+classicgamerule:
+  command:
+    gamerule:
+      query: 'Alias gamerule %s is equivalently set to: %s'
+      set: 'Alias gamerule %s is now equivalently set to: %s'
+      set_disabled: 'Alias gamerule %s is read only. Please modify the new gamerule %s directly'

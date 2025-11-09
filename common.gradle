@@ -47,17 +47,13 @@ dependencies {
 		neoForge "net.neoforged:neoforge:${project.neoforge_version}"
 	}
 
-	// runtime mods
-//	if (mcVersion < 11904 && mod_brand == 'fabric') {
-//		modRuntimeOnly(mcVersion < 11900 ? "com.github.astei:lazydfu:0.1.2" : "com.github.Fallen-Breath:lazydfu:a7cfc44c0c")
-//	}
-
 	// dependencies
-//	include(modImplementation("me.fallenbreath:conditional-mixin-${mod_brand}:${project.conditionalmixin_version}"))
-//	if (mod_brand == 'forge') {
-//		compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:${project.mixinextras_version}"))
-//	}
-//	include(annotationProcessor(implementation("io.github.llamalad7:mixinextras-${mod_brand}:${project.mixinextras_version}")))
+	if (mod_brand == 'fabric') {
+		// necessary modules to enable the fabric-resource-loader for mc1.21.9+
+		["fabric-resource-loader-v0", "fabric-resource-loader-v1", "fabric-api-base"].forEach {
+			include(modImplementation(fabricApi.module(it, project.fabric_api_version)))
+		}
+	}
 }
 
 String MOD_ICON_PATH = 'assets/classicgamerule/icon.png'

@@ -1,0 +1,6 @@
+classicgamerule:
+  command:
+    gamerule:
+      query: '游戏规则别名%s目前等价为：%s'
+      set: '游戏规则别名%s已等价被设为：%s'
+      set_disabled: '游戏规则别名%s是只读的。请直接调整新的规则%s'

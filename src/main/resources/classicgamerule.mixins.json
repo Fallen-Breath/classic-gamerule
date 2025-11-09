@@ -4,6 +4,7 @@
   "package": "me.fallenbreath.classicgamerule.mixins",
   "compatibilityLevel": "{{COMPATIBILITY_LEVEL}}",
   "mixins": [
+    "GameRuleCommandMixin"
   ],
   "client": [
   ],
