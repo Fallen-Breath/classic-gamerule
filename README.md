@@ -14,6 +14,8 @@ This is a poorly implemented incompatible change. Let's "revert" it by restoring
 
 For example, classic gamerules like `doDaylightCycle` were changed to `advance_time` (actually `minecraft:advance_time`), and `doMobSpawning` became `spawn_mobs`
 
+![screenshot](screenshot.png)
+
 ## What This Mod Does
 
 Functionalities:
