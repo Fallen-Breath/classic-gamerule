@@ -22,10 +22,12 @@ package me.fallenbreath.classicgamerule;
 
 import com.mojang.logging.LogUtils;
 import me.fallenbreath.classicgamerule.translation.Translations;
+import org.slf4j.Logger;
+
+//#if FABRIC
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.metadata.ModMetadata;
-import org.slf4j.Logger;
 //#elseif FORGE
 //$$ import net.minecraftforge.fml.ModList;
 //$$ import net.minecraftforge.fml.common.Mod;

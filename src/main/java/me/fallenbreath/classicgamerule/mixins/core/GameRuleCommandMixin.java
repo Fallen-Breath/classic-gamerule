@@ -20,7 +20,7 @@
 
 package me.fallenbreath.classicgamerule.mixins.core;
 
-import com.llamalad7.mixinextras.sugar.Local;
+import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import me.fallenbreath.classicgamerule.core.ClassicGameRuleCommandModifier;
 import net.minecraft.commands.CommandBuildContext;
@@ -42,7 +42,8 @@ public abstract class GameRuleCommandMixin
 	)
 	private static LiteralArgumentBuilder<CommandSourceStack> addClassicGameRuleNodes(
 			LiteralArgumentBuilder<CommandSourceStack> node,
-			@Local(argsOnly = true) CommandBuildContext commandBuildContext
+			CommandDispatcher<CommandSourceStack> commandDispatcher,
+			CommandBuildContext commandBuildContext
 	)
 	{
 		ClassicGameRuleCommandModifier.addClassicGameRuleNodes(node, commandBuildContext.enabledFeatures());
