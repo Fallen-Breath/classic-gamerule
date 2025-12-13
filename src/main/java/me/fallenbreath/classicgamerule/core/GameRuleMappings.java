@@ -20,6 +20,7 @@
 
 package me.fallenbreath.classicgamerule.core;
 
+import com.google.common.collect.Lists;
 import com.mojang.brigadier.arguments.BoolArgumentType;
 import me.fallenbreath.classicgamerule.translation.Translations;
 import net.minecraft.ChatFormatting;
@@ -27,7 +28,6 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.gamerules.GameRule;
 import net.minecraft.world.level.gamerules.GameRules;
-import org.apache.commons.compress.utils.Lists;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
