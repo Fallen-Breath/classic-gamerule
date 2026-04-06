@@ -13,12 +13,12 @@
     "sources": "https://github.com/Fallen-Breath/classic-gamerule"
   },
 
-  "icon": "assets/classicgamerule/icon.png",
+  "icon": "icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "me.fallenbreath.classicgamerule.ClassicGameruleMod"
+      "me.fallenbreath.classicgamerule.ClassicGameruleMod::fabricInit"
     ]
   },
   "mixins": [

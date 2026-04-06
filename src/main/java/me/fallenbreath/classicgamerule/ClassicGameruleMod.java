@@ -24,54 +24,32 @@ import com.mojang.logging.LogUtils;
 import me.fallenbreath.classicgamerule.translation.Translations;
 import org.slf4j.Logger;
 
-//#if FABRIC
-import net.fabricmc.api.ModInitializer;
-import net.fabricmc.loader.api.FabricLoader;
-import net.fabricmc.loader.api.metadata.ModMetadata;
-//#elseif FORGE
-//$$ import net.minecraftforge.fml.ModList;
-//$$ import net.minecraftforge.fml.common.Mod;
-//$$ import net.minecraftforge.forgespi.language.IModInfo;
-//#elseif NEOFORGE
-//$$ import net.neoforged.fml.ModList;
-//$$ import net.neoforged.fml.common.Mod;
-//$$ import net.neoforged.neoforgespi.language.IModInfo;
-//#endif
-
-//#if FORGE_LIKE
-//$$ @Mod(ClassicGameruleMod.MOD_ID)
-//#endif
+@net.minecraftforge.fml.common.Mod(ClassicGameruleMod.MOD_ID)
+@net.neoforged.fml.common.Mod(ClassicGameruleMod.MOD_ID)
 public class ClassicGameruleMod
-		//#if FABRIC
-		implements ModInitializer
-		//#endif
 {
 	public static final Logger LOGGER = LogUtils.getLogger();
 
 	public static final String MOD_ID = "classicgamerule";
-	public static String MOD_VERSION = "unknown";
-	public static String MOD_NAME = "unknown";
 
 	//#if FABRIC
-	@Override
-	public void onInitialize()
+	public void fabricInit()
 	{
-		ModMetadata metadata = FabricLoader.getInstance().getModContainer(MOD_ID).orElseThrow(RuntimeException::new).getMetadata();
-		MOD_NAME = metadata.getName();
-		MOD_VERSION = metadata.getVersion().getFriendlyString();
-		this.init();
+		this.commonInit();
 	}
 	//#elseif FORGE_LIKE
 	//$$ public ClassicGameruleMod()
 	//$$ {
-	//$$ 	IModInfo modInfo = ModList.get().getModContainerById(MOD_ID).orElseThrow(RuntimeException::new).getModInfo();
-	//$$ 	MOD_NAME = modInfo.getDisplayName();
-	//$$ 	MOD_VERSION = modInfo.getVersion().toString();
-	//$$ 	this.init();
+	//$$ 	this.forgeInit();
+	//$$ }
+	//$$
+	//$$ public void forgeInit()
+	//$$ {
+	//$$ 	this.commonInit();
 	//$$ }
 	//#endif
 
-	private void init()
+	private void commonInit()
 	{
 		Translations.load();
 	}
