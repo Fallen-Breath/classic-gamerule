@@ -24,7 +24,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import me.fallenbreath.classicgamerule.ClassicGameruleMod;
-import me.fallenbreath.classicgamerule.mixins.translation.ServerPlayerAccessor;
 import me.fallenbreath.classicgamerule.mixins.translation.TranslatableContentsAccessor;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.Component;
@@ -80,7 +79,7 @@ public class Translations
 		String lang = DEFAULT_LANGUAGE;
 		if (source.getEntity() instanceof ServerPlayer player)
 		{
-			lang = ((ServerPlayerAccessor)player).getLanguage();
+			lang = ((ServerPlayerLanguageAccess)player).getLanguage$classicgamerule();
 		}
 
 		String formatter = translations.getOrDefault(lang, Collections.emptyMap()).get(key);

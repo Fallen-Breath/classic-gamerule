@@ -5,7 +5,8 @@
   "compatibilityLevel": "{{COMPATIBILITY_LEVEL}}",
   "mixins": [
     "core.GameRuleCommandMixin",
-    "translation.ServerPlayerAccessor",
+    "translation.PlayerListMixin",
+    "translation.ServerPlayerMixin",
     "translation.TranslatableContentsAccessor"
   ],
   "client": [

@@ -2,7 +2,7 @@
  * This file is part of the Classic Gamerule project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2025  Fallen_Breath and contributors
+ * Copyright (C) 2026  Fallen_Breath and contributors
  *
  * Classic Gamerule is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -20,13 +20,27 @@
 
 package me.fallenbreath.classicgamerule.mixins.translation;
 
+import com.llamalad7.mixinextras.sugar.Local;
+import me.fallenbreath.classicgamerule.translation.ServerPlayerLanguageAccess;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.players.PlayerList;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.gen.Accessor;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 
-@Mixin(ServerPlayer.class)
-public interface ServerPlayerAccessor
+@Mixin(PlayerList.class)
+public abstract class PlayerListMixin
 {
-	@Accessor
-	String getLanguage();
+	@ModifyArg(
+			method = "respawn",
+			at = @At(
+					value = "INVOKE",
+					target = "Lnet/minecraft/server/level/ServerPlayer;restoreFrom(Lnet/minecraft/server/level/ServerPlayer;Z)V"
+			)
+	)
+	private ServerPlayer copyLanguageToTheNewPlayer(ServerPlayer newPlayer, @Local(argsOnly = true) ServerPlayer oldPlayer)
+	{
+		((ServerPlayerLanguageAccess)newPlayer).setLanguage$classicgamerule(((ServerPlayerLanguageAccess)oldPlayer).getLanguage$classicgamerule());
+		return newPlayer;
+	}
 }
