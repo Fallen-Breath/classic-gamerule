@@ -12,6 +12,7 @@
     "homepage": "https://modrinth.com/mod/classic-gamerule",
     "sources": "https://github.com/Fallen-Breath/classic-gamerule"
   },
+  "license": "LGPL-3.0",
 
   "icon": "icon.png",
 
