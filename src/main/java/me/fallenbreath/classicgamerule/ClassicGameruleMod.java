@@ -29,27 +29,15 @@ import org.slf4j.Logger;
 public class ClassicGameruleMod
 {
 	public static final Logger LOGGER = LogUtils.getLogger();
-
 	public static final String MOD_ID = "classicgamerule";
 
-	//#if FABRIC
-	public void fabricInit()
+	public static void fabricInit()
 	{
-		this.commonInit();
+		//noinspection InstantiationOfUtilityClass
+		new ClassicGameruleMod();
 	}
-	//#elseif FORGE_LIKE
-	//$$ public ClassicGameruleMod()
-	//$$ {
-	//$$ 	this.forgeInit();
-	//$$ }
-	//$$
-	//$$ public void forgeInit()
-	//$$ {
-	//$$ 	this.commonInit();
-	//$$ }
-	//#endif
 
-	private void commonInit()
+	public ClassicGameruleMod()
 	{
 		Translations.load();
 	}
