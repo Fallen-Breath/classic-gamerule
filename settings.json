@@ -2,6 +2,8 @@
   "versions": [
     "1.21.11-fabric",
     "1.21.11-neoforge",
-    "26.1.2-merged"
+    "26.1.2-merged",
+    "26.2-merged",
+    "26.3-merged"
   ]
 }
